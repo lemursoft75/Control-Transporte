@@ -243,26 +243,17 @@
       "tipo_evento": "entrega"
     },
     {
-      "id": "Plastisaro-Torton-20250729000000",
-      "cliente": "Plastisaro",
-      "unidad": "Torton",
-      "dias_retorno": 2,
-      "dias_retorno_calculados": 2,
-      "fecha_pedido": "2025-07-29",
-      "tipo_evento": "entrega"
-    },
-    {
-      "id": "Plastisaro-Torton-20250729000000",
-      "cliente": "Plastisaro",
-      "unidad": "Torton",
-      "dias_retorno": 2,
-      "dias_retorno_calculados": 2,
-      "fecha_pedido": "2025-07-29",
-      "tipo_evento": "entrega"
-    },
-    {
       "id": "Fervab-Torton-20250729000000",
       "cliente": "Fervab",
+      "unidad": "Torton",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 2,
+      "fecha_pedido": "2025-07-29",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Peralta-Torton-20250729000000",
+      "cliente": "Peralta",
       "unidad": "Torton",
       "dias_retorno": 2,
       "dias_retorno_calculados": 2,
@@ -604,27 +595,19 @@
       "fecha_pedido_asociado": "2025-07-29"
     },
     {
-      "id": "retorno-Plastisaro-Torton-20250729000000",
-      "tipo_evento": "retorno",
-      "unidad": "Torton",
-      "pedido_id_asociado": "Plastisaro-Torton-20250729000000",
-      "cliente_asociado": "Plastisaro",
-      "fecha_pedido_asociado": "2025-07-29"
-    },
-    {
-      "id": "retorno-Plastisaro-Torton-20250729000000",
-      "tipo_evento": "retorno",
-      "unidad": "Torton",
-      "pedido_id_asociado": "Plastisaro-Torton-20250729000000",
-      "cliente_asociado": "Plastisaro",
-      "fecha_pedido_asociado": "2025-07-29"
-    },
-    {
       "id": "retorno-Fervab-Torton-20250729000000",
       "tipo_evento": "retorno",
       "unidad": "Torton",
       "pedido_id_asociado": "Fervab-Torton-20250729000000",
       "cliente_asociado": "Fervab",
+      "fecha_pedido_asociado": "2025-07-29"
+    },
+    {
+      "id": "retorno-Peralta-Torton-20250729000000",
+      "tipo_evento": "retorno",
+      "unidad": "Torton",
+      "pedido_id_asociado": "Peralta-Torton-20250729000000",
+      "cliente_asociado": "Peralta",
       "fecha_pedido_asociado": "2025-07-29"
     }
   ],
