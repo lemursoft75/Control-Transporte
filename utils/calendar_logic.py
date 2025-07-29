@@ -12,10 +12,9 @@ def agregar_pedido(calendar, units, cliente, unidad, fecha_pedido, dias_retorno)
         units[unidad] -= 1
 
         # Generar un ID único para el pedido (útil para eliminar)
-        # Podrías usar uuid.uuid4() para IDs más robustos si hay muchos pedidos
         pedido_id = f"{cliente}-{unidad}-{fecha_pedido.strftime('%Y%m%d%H%M%S')}"
 
-        # Registrar el pedido
+        # Registrar el pedido de ENTREGA (o carga)
         pedido = {
             "id": pedido_id, # Añadir el ID
             "cliente": cliente,
@@ -35,7 +34,9 @@ def agregar_pedido(calendar, units, cliente, unidad, fecha_pedido, dias_retorno)
             "id": f"retorno-{pedido_id}", # ID para el evento de retorno
             "tipo_evento": "retorno",
             "unidad": unidad,
-            "pedido_id_asociado": pedido_id # Para vincular el retorno al pedido
+            "pedido_id_asociado": pedido_id, # Para vincular el retorno al pedido
+            "cliente_asociado": cliente,     # <--- ¡NUEVO! Añadir el cliente
+            "fecha_pedido_asociado": fecha_str # <--- ¡NUEVO! Añadir la fecha de pedido original
         })
 
         return True, f"Pedido registrado para {cliente} con unidad {unidad}. Retorno en {dias_retorno} días."
@@ -85,14 +86,13 @@ def editar_dias_retorno(calendar, units, pedido_id_a_editar, nuevos_dias_retorno
     y asegura que la unidad no se pierda o se duplique.
     """
     pedido_original = None
-    fecha_pedido_original_str = None
+    # No necesitamos fecha_pedido_original_str aquí ya que está en el pedido_original
 
     # 1. Encontrar el pedido original
     for fecha_str, eventos in calendar.items():
         for evento in eventos:
             if evento.get("id") == pedido_id_a_editar and evento.get("tipo_evento") == "entrega":
                 pedido_original = evento
-                fecha_pedido_original_str = fecha_str
                 break
         if pedido_original:
             break
@@ -123,7 +123,9 @@ def editar_dias_retorno(calendar, units, pedido_id_a_editar, nuevos_dias_retorno
         "id": f"retorno-{pedido_original['id']}",
         "tipo_evento": "retorno",
         "unidad": pedido_original["unidad"],
-        "pedido_id_asociado": pedido_original["id"]
+        "pedido_id_asociado": pedido_original["id"],
+        "cliente_asociado": pedido_original["cliente"], # <--- ¡NUEVO! Mantener la información al editar
+        "fecha_pedido_asociado": pedido_original["fecha_pedido"] # <--- ¡NUEVO! Mantener la información al editar
     })
 
     return True, f"Días de retorno para pedido {pedido_id_a_editar} actualizados a {nuevos_dias_retorno} días."
