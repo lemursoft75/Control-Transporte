@@ -3,7 +3,7 @@ import pandas as pd
 from datetime import date
 from utils.file_handler import cargar_excel
 from utils.storage import load_units, save_units, load_calendar, save_calendar, load_pedidos_excel, save_pedidos_excel, PEDIDOS_EXCEL_PATH
-from utils.calendar_logic import agregar_pedido, eliminar_pedido, editar_dias_retorno # <--- ¡Importa las nuevas funciones!
+from utils.calendar_logic import agregar_pedido, eliminar_pedido, editar_dias_retorno
 from datetime import datetime, timedelta
 import os
 import json
@@ -20,7 +20,7 @@ pedidos_excel_df = load_pedidos_excel()
 
 tabs = st.tabs(["📦 Unidades disponibles", "📥 Cargar pedidos", "🗓️ Calendario", "🧹 Limpieza"])
 
-# 📦 Unidades disponibles (sin cambios)
+# 📦 Unidades disponibles
 with tabs[0]:
     st.subheader("🔧 Configurar unidades")
     for unidad in units:
@@ -28,7 +28,7 @@ with tabs[0]:
         units[unidad] = nuevo_valor
     save_units(units)
 
-# 📥 Cargar pedidos (sin cambios)
+# 📥 Cargar pedidos
 with tabs[1]:
     st.subheader("📁 Cargar pedidos desde Excel")
 
@@ -83,20 +83,18 @@ with tabs[1]:
         st.info("El archivo Excel cargado no contiene pedidos válidos.")
 
 
-# 🗓️ Calendario - ¡Modificaciones aquí para eliminar y editar!
+# 🗓️ Calendario
 with tabs[2]:
     st.subheader("📆 Calendario de entregas")
 
     if isinstance(calendar, dict):
-        # Obtener y ordenar todas las fechas presentes en el calendario
         all_dates = sorted(calendar.keys())
 
-        # Mostrar los pedidos y retornos de cada día
         for fecha_str in all_dates:
             eventos = calendar.get(fecha_str, [])
 
             if not eventos:
-                continue # No mostrar días que puedan haber quedado vacíos
+                continue
 
             entregas = [e for e in eventos if e.get("tipo_evento") == "entrega"]
             retornos = [e for e in eventos if e.get("tipo_evento") == "retorno"]
@@ -105,7 +103,6 @@ with tabs[2]:
             resumen = f"• {len(entregas)} entrega(s), {len(retornos)} retorno(s)"
             st.caption(resumen)
 
-            # Mostrar entregas con opción de eliminar/editar
             for i, evento in enumerate(entregas):
                 col_display, col_edit_delete = st.columns([0.7, 0.3])
                 with col_display:
@@ -115,7 +112,6 @@ with tabs[2]:
                         f"🕒 Entrega: {evento['fecha_pedido']} → Regresa en {evento['dias_retorno']} días"
                     )
                 with col_edit_delete:
-                    # Botón de eliminar
                     if st.button(f"🗑️ Eliminar {evento['cliente'][:10]}...", key=f"del_btn_{evento['id']}_{i}"):
                         ok, msg = eliminar_pedido(calendar, units, evento['id'])
                         if ok:
@@ -125,7 +121,6 @@ with tabs[2]:
                             st.rerun()
                         else:
                             st.error(msg)
-                    # Editor de días de retorno
                     if st.checkbox(f"Editar días de retorno ({evento['cliente'][:10]})", key=f"edit_chk_{evento['id']}_{i}"):
                         nuevos_dias = st.number_input(
                             f"Nuevos días retorno para {evento['cliente']}",
@@ -142,7 +137,6 @@ with tabs[2]:
                             else:
                                 st.error(msg)
 
-            # Mostrar retornos (sin opción de eliminar directamente, se eliminan con el pedido)
             for evento in retornos:
                 st.info(f"🔁 Retorno de unidad: **{evento['unidad']}**")
     else:
@@ -150,51 +144,52 @@ with tabs[2]:
         st.write(calendar)
 
 
-# 🧹 Limpieza (sin cambios)
-with st.expander("🧼 Limpieza de datos (Expandir para ver opciones)"):
-    st.warning("Esta acción eliminará todos los pedidos y unidades. No se puede deshacer.")
+# 🧹 Limpieza - ¡Ahora dentro de su propia pestaña!
+with tabs[3]: # Asegúrate de que este sea el índice correcto para la pestaña "Limpieza"
+    with st.expander("🧼 Limpieza de datos (Expandir para ver opciones)"):
+        st.warning("Esta acción eliminará todos los pedidos y unidades. No se puede deshacer.")
 
-    if 'confirm_clean' not in st.session_state:
-        st.session_state.confirm_clean = False
+        if 'confirm_clean' not in st.session_state:
+            st.session_state.confirm_clean = False
 
-    st.session_state.confirm_clean = st.checkbox("Estoy seguro de querer limpiar todos los datos", key="clean_confirm_checkbox")
+        st.session_state.confirm_clean = st.checkbox("Estoy seguro de querer limpiar todos los datos", key="clean_confirm_checkbox")
 
-    if st.button("⚠️ Limpiar todo", type="primary", disabled=not st.session_state.confirm_clean):
-        if st.session_state.confirm_clean:
-            units_path = os.path.join("data", "units.json")
-            calendar_path = os.path.join("data", "calendar.json")
+        if st.button("⚠️ Limpiar todo", type="primary", disabled=not st.session_state.confirm_clean):
+            if st.session_state.confirm_clean:
+                units_path = os.path.join("data", "units.json")
+                calendar_path = os.path.join("data", "calendar.json")
 
-            unidades_nuevas = {
-                "Tráiler 53": 0,
-                "Tráiler 48": 0,
-                "Torton": 0,
-                "Interplanta": 0
-            }
+                unidades_nuevas = {
+                    "Tráiler 53": 0,
+                    "Tráiler 48": 0,
+                    "Torton": 0,
+                    "Interplanta": 0
+                }
 
-            hoy = datetime.today().date()
-            calendario_nuevo = {
-                str(hoy + timedelta(days=i)): []
-                for i in range(7)
-            }
+                hoy = datetime.today().date()
+                calendario_nuevo = {
+                    str(hoy + timedelta(days=i)): []
+                    for i in range(7)
+                }
 
-            try:
-                with open(units_path, "w", encoding="utf-8") as f:
-                    json.dump(unidades_nuevas, f, indent=2)
+                try:
+                    with open(units_path, "w", encoding="utf-8") as f:
+                        json.dump(unidades_nuevas, f, indent=2)
 
-                with open(calendar_path, "w", encoding="utf-8") as f:
-                    json.dump(calendario_nuevo, f, indent=2)
+                    with open(calendar_path, "w", encoding="utf-8") as f:
+                        json.dump(calendario_nuevo, f, indent=2)
 
-                if os.path.exists(PEDIDOS_EXCEL_PATH):
-                    os.remove(PEDIDOS_EXCEL_PATH)
+                    if os.path.exists(PEDIDOS_EXCEL_PATH):
+                        os.remove(PEDIDOS_EXCEL_PATH)
 
-                st.success("🚿 Datos limpiados correctamente.")
-                st.write("📁 Unidades reiniciadas:", unidades_nuevas)
-                st.write("📅 Calendario reiniciado:", calendario_nuevo)
+                    st.success("🚿 Datos limpiados correctamente.")
+                    st.write("📁 Unidades reiniciadas:", unidades_nuevas)
+                    st.write("📅 Calendario reiniciado:", calendario_nuevo)
 
-                st.rerun()
+                    st.rerun()
 
-            except Exception as e:
-                st.error(f"❌ Error al limpiar los datos: {e}")
-                st.write("Por favor, verifica los permisos de los archivos o el formato de los datos.")
-        else:
-            st.warning("Por favor, marca la casilla 'Estoy seguro' para confirmar la limpieza.")
+                except Exception as e:
+                    st.error(f"❌ Error al limpiar los datos: {e}")
+                    st.write("Por favor, verifica los permisos de los archivos o el formato de los datos.")
+            else:
+                st.warning("Por favor, marca la casilla 'Estoy seguro' para confirmar la limpieza.")

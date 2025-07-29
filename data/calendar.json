@@ -1,20 +1,9 @@
 {
-  "2025-07-29": [
-    {
-      "id": "Plastisaro-Torton-20250729000000",
-      "cliente": "Plastisaro",
-      "unidad": "Torton",
-      "dias_retorno": 3,
-      "fecha_pedido": "2025-07-29",
-      "tipo_evento": "entrega"
-    }
-  ],
-  "2025-08-01": [
-    {
-      "id": "retorno-Plastisaro-Torton-20250729000000",
-      "tipo_evento": "retorno",
-      "unidad": "Torton",
-      "pedido_id_asociado": "Plastisaro-Torton-20250729000000"
-    }
-  ]
+  "2025-07-29": [],
+  "2025-07-30": [],
+  "2025-07-31": [],
+  "2025-08-01": [],
+  "2025-08-02": [],
+  "2025-08-03": [],
+  "2025-08-04": []
 }
