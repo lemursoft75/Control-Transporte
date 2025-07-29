@@ -1,1 +1,673 @@
-{}
+{
+  "2025-07-26": [
+    {
+      "id": "Sanchez-Tr\u00e1iler 53-20250726000000",
+      "cliente": "Sanchez",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 3,
+      "fecha_pedido": "2025-07-26",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Prudencia Luis-Tr\u00e1iler 53-20250726000000",
+      "cliente": "Prudencia Luis",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "fecha_pedido": "2025-07-26",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "MiniAbastos-Tr\u00e1iler 53-20250726000000",
+      "cliente": "MiniAbastos",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "fecha_pedido": "2025-07-26",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "MiniAbastos-Tr\u00e1iler 48-20250726000000",
+      "cliente": "MiniAbastos",
+      "unidad": "Tr\u00e1iler 48",
+      "dias_retorno": 4,
+      "fecha_pedido": "2025-07-26",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Kmart-Tr\u00e1iler 53-20250726000000",
+      "cliente": "Kmart",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "fecha_pedido": "2025-07-26",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Alesur-Tr\u00e1iler 53-20250726000000",
+      "cliente": "Alesur",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "fecha_pedido": "2025-07-26",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Yukunsa Merida-Tr\u00e1iler 53-20250726000000",
+      "cliente": "Yukunsa Merida",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 3,
+      "fecha_pedido": "2025-07-26",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Pablin -Tr\u00e1iler 53-20250726000000",
+      "cliente": "Pablin ",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-26",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Pablin -Tr\u00e1iler 53-20250726000000",
+      "cliente": "Pablin ",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-26",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Sanchez-Tr\u00e1iler 53-20250726000000",
+      "cliente": "Sanchez",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-26",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Fervab-Torton-20250726000000",
+      "cliente": "Fervab",
+      "unidad": "Torton",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 3,
+      "fecha_pedido": "2025-07-26",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Fervab-Torton-20250726000000",
+      "cliente": "Fervab",
+      "unidad": "Torton",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 3,
+      "fecha_pedido": "2025-07-26",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Plasticun-Torton-20250726000000",
+      "cliente": "Plasticun",
+      "unidad": "Torton",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 3,
+      "fecha_pedido": "2025-07-26",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Plastisaro-Torton-20250726000000",
+      "cliente": "Plastisaro",
+      "unidad": "Torton",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 3,
+      "fecha_pedido": "2025-07-26",
+      "tipo_evento": "entrega"
+    }
+  ],
+  "2025-07-29": [
+    {
+      "id": "retorno-Sanchez-Tr\u00e1iler 53-20250726000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Sanchez-Tr\u00e1iler 53-20250726000000",
+      "cliente_asociado": "Sanchez",
+      "fecha_pedido_asociado": "2025-07-26"
+    },
+    {
+      "id": "retorno-Yukunsa Merida-Tr\u00e1iler 53-20250726000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Yukunsa Merida-Tr\u00e1iler 53-20250726000000",
+      "cliente_asociado": "Yukunsa Merida",
+      "fecha_pedido_asociado": "2025-07-26"
+    },
+    {
+      "id": "retorno-Fervab-Torton-20250726000000",
+      "tipo_evento": "retorno",
+      "unidad": "Torton",
+      "pedido_id_asociado": "Fervab-Torton-20250726000000",
+      "cliente_asociado": "Fervab",
+      "fecha_pedido_asociado": "2025-07-26"
+    },
+    {
+      "id": "retorno-Fervab-Torton-20250726000000",
+      "tipo_evento": "retorno",
+      "unidad": "Torton",
+      "pedido_id_asociado": "Fervab-Torton-20250726000000",
+      "cliente_asociado": "Fervab",
+      "fecha_pedido_asociado": "2025-07-26"
+    },
+    {
+      "id": "retorno-Plasticun-Torton-20250726000000",
+      "tipo_evento": "retorno",
+      "unidad": "Torton",
+      "pedido_id_asociado": "Plasticun-Torton-20250726000000",
+      "cliente_asociado": "Plasticun",
+      "fecha_pedido_asociado": "2025-07-26"
+    },
+    {
+      "id": "retorno-Plastisaro-Torton-20250726000000",
+      "tipo_evento": "retorno",
+      "unidad": "Torton",
+      "pedido_id_asociado": "Plastisaro-Torton-20250726000000",
+      "cliente_asociado": "Plastisaro",
+      "fecha_pedido_asociado": "2025-07-26"
+    },
+    {
+      "id": "Yukunsa Merida-Tr\u00e1iler 53-20250729000000",
+      "cliente": "Yukunsa Merida",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 2,
+      "fecha_pedido": "2025-07-29",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Plasticun-Tr\u00e1iler 53-20250729000000",
+      "cliente": "Plasticun",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 2,
+      "fecha_pedido": "2025-07-29",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Emma Leticia-Tr\u00e1iler 53-20250729000000",
+      "cliente": "Emma Leticia",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-29",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Kmart-Tr\u00e1iler 53-20250729000000",
+      "cliente": "Kmart",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-29",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Kmart-Tr\u00e1iler 53-20250729000000",
+      "cliente": "Kmart",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-29",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Eneider Cruz-Tr\u00e1iler 53-20250729000000",
+      "cliente": "Eneider Cruz",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-29",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Comprando y Ganando-Tr\u00e1iler 53-20250729000000",
+      "cliente": "Comprando y Ganando",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-29",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Bolsas y Empaques Marcas MDA-Torton-20250729000000",
+      "cliente": "Bolsas y Empaques Marcas MDA",
+      "unidad": "Torton",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 2,
+      "fecha_pedido": "2025-07-29",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Plastisaro-Torton-20250729000000",
+      "cliente": "Plastisaro",
+      "unidad": "Torton",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 2,
+      "fecha_pedido": "2025-07-29",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Plastisaro-Torton-20250729000000",
+      "cliente": "Plastisaro",
+      "unidad": "Torton",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 2,
+      "fecha_pedido": "2025-07-29",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Fervab-Torton-20250729000000",
+      "cliente": "Fervab",
+      "unidad": "Torton",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 2,
+      "fecha_pedido": "2025-07-29",
+      "tipo_evento": "entrega"
+    }
+  ],
+  "2025-07-30": [
+    {
+      "id": "retorno-Prudencia Luis-Tr\u00e1iler 53-20250726000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Prudencia Luis-Tr\u00e1iler 53-20250726000000",
+      "cliente_asociado": "Prudencia Luis",
+      "fecha_pedido_asociado": "2025-07-26"
+    },
+    {
+      "id": "retorno-MiniAbastos-Tr\u00e1iler 53-20250726000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "MiniAbastos-Tr\u00e1iler 53-20250726000000",
+      "cliente_asociado": "MiniAbastos",
+      "fecha_pedido_asociado": "2025-07-26"
+    },
+    {
+      "id": "retorno-MiniAbastos-Tr\u00e1iler 48-20250726000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 48",
+      "pedido_id_asociado": "MiniAbastos-Tr\u00e1iler 48-20250726000000",
+      "cliente_asociado": "MiniAbastos",
+      "fecha_pedido_asociado": "2025-07-26"
+    },
+    {
+      "id": "retorno-Kmart-Tr\u00e1iler 53-20250726000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Kmart-Tr\u00e1iler 53-20250726000000",
+      "cliente_asociado": "Kmart",
+      "fecha_pedido_asociado": "2025-07-26"
+    },
+    {
+      "id": "retorno-Alesur-Tr\u00e1iler 53-20250726000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Alesur-Tr\u00e1iler 53-20250726000000",
+      "cliente_asociado": "Alesur",
+      "fecha_pedido_asociado": "2025-07-26"
+    },
+    {
+      "id": "retorno-Pablin -Tr\u00e1iler 53-20250726000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Pablin -Tr\u00e1iler 53-20250726000000",
+      "cliente_asociado": "Pablin ",
+      "fecha_pedido_asociado": "2025-07-26"
+    },
+    {
+      "id": "retorno-Pablin -Tr\u00e1iler 53-20250726000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Pablin -Tr\u00e1iler 53-20250726000000",
+      "cliente_asociado": "Pablin ",
+      "fecha_pedido_asociado": "2025-07-26"
+    },
+    {
+      "id": "retorno-Sanchez-Tr\u00e1iler 53-20250726000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Sanchez-Tr\u00e1iler 53-20250726000000",
+      "cliente_asociado": "Sanchez",
+      "fecha_pedido_asociado": "2025-07-26"
+    },
+    {
+      "id": "retorno-Fervab-Tr\u00e1iler 53-20250728000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Fervab-Tr\u00e1iler 53-20250728000000",
+      "cliente_asociado": "Fervab",
+      "fecha_pedido_asociado": "2025-07-28"
+    },
+    {
+      "id": "retorno-Casa Santos Lugo-Tr\u00e1iler 53-20250728000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Casa Santos Lugo-Tr\u00e1iler 53-20250728000000",
+      "cliente_asociado": "Casa Santos Lugo",
+      "fecha_pedido_asociado": "2025-07-28"
+    },
+    {
+      "id": "retorno-Yukunsa Merida-Tr\u00e1iler 53-20250728000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Yukunsa Merida-Tr\u00e1iler 53-20250728000000",
+      "cliente_asociado": "Yukunsa Merida",
+      "fecha_pedido_asociado": "2025-07-28"
+    },
+    {
+      "id": "retorno-Poliyuca-Torton-20250728000000",
+      "tipo_evento": "retorno",
+      "unidad": "Torton",
+      "pedido_id_asociado": "Poliyuca-Torton-20250728000000",
+      "cliente_asociado": "Poliyuca",
+      "fecha_pedido_asociado": "2025-07-28"
+    },
+    {
+      "id": "retorno-Casa Santos Lugo-Torton-20250728000000",
+      "tipo_evento": "retorno",
+      "unidad": "Torton",
+      "pedido_id_asociado": "Casa Santos Lugo-Torton-20250728000000",
+      "cliente_asociado": "Casa Santos Lugo",
+      "fecha_pedido_asociado": "2025-07-28"
+    }
+  ],
+  "2025-07-28": [
+    {
+      "id": "Fervab-Tr\u00e1iler 53-20250728000000",
+      "cliente": "Fervab",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 2,
+      "fecha_pedido": "2025-07-28",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Plasticentro-Tr\u00e1iler 53-20250728000000",
+      "cliente": "Plasticentro",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-28",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Plasticentro-Tr\u00e1iler 53-20250728000000",
+      "cliente": "Plasticentro",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-28",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Succasa-Tr\u00e1iler 53-20250728000000",
+      "cliente": "Succasa",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-28",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Pablin -Tr\u00e1iler 53-20250728000000",
+      "cliente": "Pablin ",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-28",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Pablin -Tr\u00e1iler 53-20250728000000",
+      "cliente": "Pablin ",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-28",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Pablin -Tr\u00e1iler 53-20250728000000",
+      "cliente": "Pablin ",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-28",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Casa Santos Lugo-Tr\u00e1iler 53-20250728000000",
+      "cliente": "Casa Santos Lugo",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 2,
+      "fecha_pedido": "2025-07-28",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Sanchez-Tr\u00e1iler 53-20250728000000",
+      "cliente": "Sanchez",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-28",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Yukunsa Merida-Tr\u00e1iler 53-20250728000000",
+      "cliente": "Yukunsa Merida",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 2,
+      "fecha_pedido": "2025-07-28",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Sanchez-Tr\u00e1iler 53-20250728000000",
+      "cliente": "Sanchez",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-28",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Sanchez-Tr\u00e1iler 53-20250728000000",
+      "cliente": "Sanchez",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-28",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Poliyuca-Torton-20250728000000",
+      "cliente": "Poliyuca",
+      "unidad": "Torton",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 2,
+      "fecha_pedido": "2025-07-28",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Casa Santos Lugo-Torton-20250728000000",
+      "cliente": "Casa Santos Lugo",
+      "unidad": "Torton",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 2,
+      "fecha_pedido": "2025-07-28",
+      "tipo_evento": "entrega"
+    }
+  ],
+  "2025-08-01": [
+    {
+      "id": "retorno-Plasticentro-Tr\u00e1iler 53-20250728000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Plasticentro-Tr\u00e1iler 53-20250728000000",
+      "cliente_asociado": "Plasticentro",
+      "fecha_pedido_asociado": "2025-07-28"
+    },
+    {
+      "id": "retorno-Plasticentro-Tr\u00e1iler 53-20250728000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Plasticentro-Tr\u00e1iler 53-20250728000000",
+      "cliente_asociado": "Plasticentro",
+      "fecha_pedido_asociado": "2025-07-28"
+    },
+    {
+      "id": "retorno-Succasa-Tr\u00e1iler 53-20250728000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Succasa-Tr\u00e1iler 53-20250728000000",
+      "cliente_asociado": "Succasa",
+      "fecha_pedido_asociado": "2025-07-28"
+    },
+    {
+      "id": "retorno-Pablin -Tr\u00e1iler 53-20250728000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Pablin -Tr\u00e1iler 53-20250728000000",
+      "cliente_asociado": "Pablin ",
+      "fecha_pedido_asociado": "2025-07-28"
+    },
+    {
+      "id": "retorno-Pablin -Tr\u00e1iler 53-20250728000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Pablin -Tr\u00e1iler 53-20250728000000",
+      "cliente_asociado": "Pablin ",
+      "fecha_pedido_asociado": "2025-07-28"
+    },
+    {
+      "id": "retorno-Pablin -Tr\u00e1iler 53-20250728000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Pablin -Tr\u00e1iler 53-20250728000000",
+      "cliente_asociado": "Pablin ",
+      "fecha_pedido_asociado": "2025-07-28"
+    },
+    {
+      "id": "retorno-Sanchez-Tr\u00e1iler 53-20250728000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Sanchez-Tr\u00e1iler 53-20250728000000",
+      "cliente_asociado": "Sanchez",
+      "fecha_pedido_asociado": "2025-07-28"
+    },
+    {
+      "id": "retorno-Sanchez-Tr\u00e1iler 53-20250728000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Sanchez-Tr\u00e1iler 53-20250728000000",
+      "cliente_asociado": "Sanchez",
+      "fecha_pedido_asociado": "2025-07-28"
+    },
+    {
+      "id": "retorno-Sanchez-Tr\u00e1iler 53-20250728000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Sanchez-Tr\u00e1iler 53-20250728000000",
+      "cliente_asociado": "Sanchez",
+      "fecha_pedido_asociado": "2025-07-28"
+    }
+  ],
+  "2025-07-31": [
+    {
+      "id": "retorno-Yukunsa Merida-Tr\u00e1iler 53-20250729000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Yukunsa Merida-Tr\u00e1iler 53-20250729000000",
+      "cliente_asociado": "Yukunsa Merida",
+      "fecha_pedido_asociado": "2025-07-29"
+    },
+    {
+      "id": "retorno-Plasticun-Tr\u00e1iler 53-20250729000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Plasticun-Tr\u00e1iler 53-20250729000000",
+      "cliente_asociado": "Plasticun",
+      "fecha_pedido_asociado": "2025-07-29"
+    },
+    {
+      "id": "retorno-Bolsas y Empaques Marcas MDA-Torton-20250729000000",
+      "tipo_evento": "retorno",
+      "unidad": "Torton",
+      "pedido_id_asociado": "Bolsas y Empaques Marcas MDA-Torton-20250729000000",
+      "cliente_asociado": "Bolsas y Empaques Marcas MDA",
+      "fecha_pedido_asociado": "2025-07-29"
+    },
+    {
+      "id": "retorno-Plastisaro-Torton-20250729000000",
+      "tipo_evento": "retorno",
+      "unidad": "Torton",
+      "pedido_id_asociado": "Plastisaro-Torton-20250729000000",
+      "cliente_asociado": "Plastisaro",
+      "fecha_pedido_asociado": "2025-07-29"
+    },
+    {
+      "id": "retorno-Plastisaro-Torton-20250729000000",
+      "tipo_evento": "retorno",
+      "unidad": "Torton",
+      "pedido_id_asociado": "Plastisaro-Torton-20250729000000",
+      "cliente_asociado": "Plastisaro",
+      "fecha_pedido_asociado": "2025-07-29"
+    },
+    {
+      "id": "retorno-Fervab-Torton-20250729000000",
+      "tipo_evento": "retorno",
+      "unidad": "Torton",
+      "pedido_id_asociado": "Fervab-Torton-20250729000000",
+      "cliente_asociado": "Fervab",
+      "fecha_pedido_asociado": "2025-07-29"
+    }
+  ],
+  "2025-08-02": [
+    {
+      "id": "retorno-Emma Leticia-Tr\u00e1iler 53-20250729000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Emma Leticia-Tr\u00e1iler 53-20250729000000",
+      "cliente_asociado": "Emma Leticia",
+      "fecha_pedido_asociado": "2025-07-29"
+    },
+    {
+      "id": "retorno-Kmart-Tr\u00e1iler 53-20250729000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Kmart-Tr\u00e1iler 53-20250729000000",
+      "cliente_asociado": "Kmart",
+      "fecha_pedido_asociado": "2025-07-29"
+    },
+    {
+      "id": "retorno-Kmart-Tr\u00e1iler 53-20250729000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Kmart-Tr\u00e1iler 53-20250729000000",
+      "cliente_asociado": "Kmart",
+      "fecha_pedido_asociado": "2025-07-29"
+    },
+    {
+      "id": "retorno-Eneider Cruz-Tr\u00e1iler 53-20250729000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Eneider Cruz-Tr\u00e1iler 53-20250729000000",
+      "cliente_asociado": "Eneider Cruz",
+      "fecha_pedido_asociado": "2025-07-29"
+    },
+    {
+      "id": "retorno-Comprando y Ganando-Tr\u00e1iler 53-20250729000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Comprando y Ganando-Tr\u00e1iler 53-20250729000000",
+      "cliente_asociado": "Comprando y Ganando",
+      "fecha_pedido_asociado": "2025-07-29"
+    }
+  ]
+}

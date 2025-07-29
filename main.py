@@ -20,20 +20,75 @@ pedidos_excel_df = load_pedidos_excel()
 
 tabs = st.tabs(["📦 Unidades disponibles", "📥 Cargar pedidos", "🗓️ Calendario", "🧹 Limpieza"])
 
-# 📦 Unidades disponibles
+# 📦 Unidades disponibles - ¡Nuevas métricas aquí!
 with tabs[0]:
-    st.subheader("🔧 Configurar unidades")
+    st.subheader("🔧 Configurar unidades base")
     for unidad in units:
         nuevo_valor = st.number_input(f"{unidad}", value=units[unidad], min_value=0, step=1,
                                       key=f"config_unit_{unidad}")
         units[unidad] = nuevo_valor
     save_units(units)
 
-# 📥 Cargar pedidos - ¡El buscador para registrar pedidos va aquí!
+    st.markdown("---")
+    st.subheader("📊 Resumen y Pronóstico de Unidades")
+
+    hoy = datetime.today().date()
+    mañana = hoy + timedelta(days=1)
+
+    hoy_str = hoy.strftime("%Y-%m-%d")
+    mañana_str = mañana.strftime("%Y-%m-%d")
+
+    eventos_hoy = calendar.get(hoy_str, [])
+    eventos_mañana = calendar.get(mañana_str, [])
+
+    cargas_hoy = {unidad: 0 for unidad in units.keys()}
+    retornos_hoy = {unidad: 0 for unidad in units.keys()}
+    cargas_mañana = {unidad: 0 for unidad in units.keys()}
+    retornos_mañana = {unidad: 0 for unidad in units.keys()}
+
+    # Contar cargas y retornos para hoy
+    for evento in eventos_hoy:
+        if evento.get("tipo_evento") == "entrega":
+            cargas_hoy[evento["unidad"]] += 1
+        elif evento.get("tipo_evento") == "retorno":
+            retornos_hoy[evento["unidad"]] += 1
+
+    # Contar cargas y retornos para mañana
+    for evento in eventos_mañana:
+        if evento.get("tipo_evento") == "entrega":
+            cargas_mañana[evento["unidad"]] += 1
+        elif evento.get("tipo_evento") == "retorno":
+            retornos_mañana[evento["unidad"]] += 1
+
+    # Preparar datos para la tabla
+    data = []
+    for unidad_tipo in units.keys():
+        disponibles_config = units[unidad_tipo]
+
+        # Calcular disponibles hoy (base - cargas de hoy + retornos de hoy)
+        disponibles_hoy = disponibles_config - cargas_hoy[unidad_tipo] + retornos_hoy[unidad_tipo]
+
+        # Calcular pronóstico para mañana (disponibles hoy - cargas de mañana + retornos de mañana)
+        pronostico_mañana = disponibles_hoy - cargas_mañana[unidad_tipo] + retornos_mañana[unidad_tipo]
+
+        data.append({
+            "Unidad": unidad_tipo,
+            "Config. Base": disponibles_config,
+            f"Cargas Hoy ({hoy.strftime('%d/%m')})": cargas_hoy[unidad_tipo],
+            f"Retornos Hoy ({hoy.strftime('%d/%m')})": retornos_hoy[unidad_tipo],
+            f"Disponibles Hoy ({hoy.strftime('%d/%m')})": disponibles_hoy,
+            f"Cargas Mañana ({mañana.strftime('%d/%m')})": cargas_mañana[unidad_tipo],
+            f"Retornos Mañana ({mañana.strftime('%d/%m')})": retornos_mañana[unidad_tipo],
+            f"Pronóstico Mañana ({mañana.strftime('%d/%m')})": pronostico_mañana
+        })
+
+    df_resumen = pd.DataFrame(data)
+    st.dataframe(df_resumen.set_index("Unidad"))
+
+# 📥 Cargar pedidos - (Sin cambios en esta sección)
 with tabs[1]:
     #st.subheader("📁 Cargar pedidos desde Excel")
 
-    # Lógica para cargar y guardar el archivo Excel
     df_cargado_temporal = cargar_excel()
 
     if df_cargado_temporal is not None:
@@ -45,21 +100,16 @@ with tabs[1]:
     elif pedidos_excel_df is None:
         st.info("Por favor, sube un archivo Excel para empezar a registrar pedidos.")
 
-    # Usamos el DataFrame cargado (ya sea del archivo guardado o del recién subido)
     df_actual_pedidos = pedidos_excel_df
 
     if df_actual_pedidos is not None and not df_actual_pedidos.empty:
         st.write("---")
         st.subheader("Pedidos disponibles para registrar:")
 
-        # --- Buscador de clientes específico para esta sección ---
         search_cliente_registrar = st.text_input("🔍 Buscar cliente para registrar:", "",
                                                  key="search_cliente_registrar").lower()
-        # -----------------------------------------------------------
 
-        # Filtrar el DataFrame si hay un término de búsqueda
         if search_cliente_registrar:
-            # Filtramos el DataFrame por la columna 'Cliente'
             df_display = df_actual_pedidos[
                 df_actual_pedidos["Cliente"].astype(str).str.lower().str.contains(search_cliente_registrar)
             ]
@@ -68,7 +118,6 @@ with tabs[1]:
         else:
             df_display = df_actual_pedidos
 
-        # Mostrar el DataFrame (filtrado o completo)
         st.dataframe(df_display)
 
         if st.button("🗑️ Eliminar Excel cargado (permanentemente)", type="secondary"):
@@ -78,8 +127,7 @@ with tabs[1]:
                 st.rerun()
 
         st.info("Asigna unidad y fecha para cada pedido cargado:")
-        # Iterar sobre el DataFrame filtrado (df_display)
-        for index, row in df_display.iterrows():  # ¡Importante: iteramos sobre df_display!
+        for index, row in df_display.iterrows():
             st.markdown("---")
             cliente = row["Cliente"]
             dias_retorno = row["Días Retorno"]
@@ -105,7 +153,7 @@ with tabs[1]:
     elif pedidos_excel_df is not None and pedidos_excel_df.empty:
         st.info("El archivo Excel cargado no contiene pedidos válidos.")
 
-# 🗓️ Calendario - Mostrar cliente y fecha de carga en retornos
+# 🗓️ Calendario - (Sin cambios en esta sección)
 with tabs[2]:
     st.subheader("📆 Calendario de Pedidos")
 
@@ -129,20 +177,20 @@ with tabs[2]:
             resumen = f"• {len(filtered_entregas)} carga(s), {len(filtered_retornos)} retorno(s)"
             st.caption(resumen)
 
-            # Muestra las entregas (cargas)
             for i, evento in enumerate(filtered_entregas):
                 col_display, col_edit_delete = st.columns([0.7, 0.3])
                 with col_display:
                     emoji = "💎" if evento["cliente"].lower() in ["plastisaro", "plastinorte"] else "🚛"
                     fecha_carga_dt = datetime.strptime(evento['fecha_pedido'], "%Y-%m-%d").date()
-                    fecha_retorno_calculada = fecha_carga_dt + timedelta(days=evento['dias_retorno'])
+                    # Usar dias_retorno_calculados si existe, sino dias_retorno
+                    dias_para_calculo = evento.get('dias_retorno_calculados', evento['dias_retorno'])
+                    fecha_retorno_calculada = fecha_carga_dt + timedelta(days=dias_para_calculo)
 
                     st.success(
                         f"{emoji} **{evento['cliente']}** — {evento['unidad']} | "
                         f"🚚 Carga: {fecha_carga_dt.strftime('%d/%m/%Y')} → Retorno: {fecha_retorno_calculada.strftime('%d/%m/%Y')}"
                     )
                 with col_edit_delete:
-                    # Botón de eliminar
                     if st.button(f"🗑️ Eliminar {evento['cliente'][:10]}...", key=f"del_btn_{evento['id']}_{i}"):
                         ok, msg = eliminar_pedido(calendar, units, evento['id'])
                         if ok:
@@ -152,7 +200,6 @@ with tabs[2]:
                             st.rerun()
                         else:
                             st.error(msg)
-                    # Opciones de edición dentro de un expander
                     with st.expander(f"Editar días ({evento['cliente'][:10]})"):
                         nuevos_dias = st.number_input(
                             f"Nuevos días retorno para {evento['cliente']}",
@@ -169,13 +216,10 @@ with tabs[2]:
                             else:
                                 st.error(msg)
 
-            # Muestra los retornos
             for evento in filtered_retornos:
-                # --- ¡NUEVO! Muestra cliente y fecha de pedido original para el retorno ---
                 cliente_retorno = evento.get("cliente_asociado", "Desconocido")
                 fecha_pedido_retorno_str = evento.get("fecha_pedido_asociado", "Fecha desconocida")
 
-                # Opcional: convertir la fecha de pedido a formato amigable
                 try:
                     fecha_pedido_dt = datetime.strptime(fecha_pedido_retorno_str, "%Y-%m-%d").date()
                     fecha_pedido_formateada = fecha_pedido_dt.strftime('%d/%m/%Y')
@@ -194,7 +238,7 @@ with tabs[2]:
         st.error("❌ El calendario no tiene el formato correcto.")
         st.write(calendar)
 
-# 🧹 Limpieza
+# 🧹 Limpieza - (Sin cambios en esta sección)
 with tabs[3]:
     with st.expander("🧼 Limpieza de datos (Expandir para ver opciones)"):
         st.warning("Esta acción eliminará todos los pedidos y unidades. No se puede deshacer.")
