@@ -365,6 +365,186 @@
       "pedido_id_asociado": "Casa Santos Lugo-Torton-20250728000000",
       "cliente_asociado": "Casa Santos Lugo",
       "fecha_pedido_asociado": "2025-07-28"
+    },
+    {
+      "id": "Sanchez-Tr\u00e1iler 53-20250730000000",
+      "cliente": "Sanchez",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-30",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Sanchez-Tr\u00e1iler 53-20250730000000",
+      "cliente": "Sanchez",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-30",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Sanchez-Tr\u00e1iler 53-20250730000000",
+      "cliente": "Sanchez",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-30",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Sanchez-Tr\u00e1iler 53-20250730000000",
+      "cliente": "Sanchez",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-30",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Sanchez-Tr\u00e1iler 53-20250730000000",
+      "cliente": "Sanchez",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-30",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Sanchez-Tr\u00e1iler 53-20250730000000",
+      "cliente": "Sanchez",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-30",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Sanchez-Tr\u00e1iler 53-20250730000000",
+      "cliente": "Sanchez",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-30",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Sanchez-Tr\u00e1iler 53-20250730000000",
+      "cliente": "Sanchez",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-30",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Sanchez-Tr\u00e1iler 48-20250730000000",
+      "cliente": "Sanchez",
+      "unidad": "Tr\u00e1iler 48",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-30",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Sanchez-Tr\u00e1iler 48-20250730000000",
+      "cliente": "Sanchez",
+      "unidad": "Tr\u00e1iler 48",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-30",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Edce-Tr\u00e1iler 53-20250730000000",
+      "cliente": "Edce",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 2,
+      "fecha_pedido": "2025-07-30",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Edce-Tr\u00e1iler 53-20250730000000",
+      "cliente": "Edce",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 2,
+      "fecha_pedido": "2025-07-30",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Succasa-Tr\u00e1iler 53-20250730000000",
+      "cliente": "Succasa",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-30",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Succasa-Tr\u00e1iler 53-20250730000000",
+      "cliente": "Succasa",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-30",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Sauri-Tr\u00e1iler 53-20250730000000",
+      "cliente": "Sauri",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 2,
+      "fecha_pedido": "2025-07-30",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Sanchez-Interplanta-20250730000000",
+      "cliente": "Sanchez",
+      "unidad": "Interplanta",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-30",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Comprando y Ganando-Interplanta-20250730000000",
+      "cliente": "Comprando y Ganando",
+      "unidad": "Interplanta",
+      "dias_retorno": 4,
+      "dias_retorno_calculados": 4,
+      "fecha_pedido": "2025-07-30",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Fervab-Torton-20250730000000",
+      "cliente": "Fervab",
+      "unidad": "Torton",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 2,
+      "fecha_pedido": "2025-07-30",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Fervab-Torton-20250730000000",
+      "cliente": "Fervab",
+      "unidad": "Torton",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 2,
+      "fecha_pedido": "2025-07-30",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Edce-Torton-20250730000000",
+      "cliente": "Edce",
+      "unidad": "Torton",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 2,
+      "fecha_pedido": "2025-07-30",
+      "tipo_evento": "entrega"
     }
   ],
   "2025-07-28": [
@@ -567,6 +747,54 @@
       "pedido_id_asociado": "Sanchez-Tr\u00e1iler 53-20250728000000",
       "cliente_asociado": "Sanchez",
       "fecha_pedido_asociado": "2025-07-28"
+    },
+    {
+      "id": "retorno-Edce-Tr\u00e1iler 53-20250730000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Edce-Tr\u00e1iler 53-20250730000000",
+      "cliente_asociado": "Edce",
+      "fecha_pedido_asociado": "2025-07-30"
+    },
+    {
+      "id": "retorno-Edce-Tr\u00e1iler 53-20250730000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Edce-Tr\u00e1iler 53-20250730000000",
+      "cliente_asociado": "Edce",
+      "fecha_pedido_asociado": "2025-07-30"
+    },
+    {
+      "id": "retorno-Sauri-Tr\u00e1iler 53-20250730000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Sauri-Tr\u00e1iler 53-20250730000000",
+      "cliente_asociado": "Sauri",
+      "fecha_pedido_asociado": "2025-07-30"
+    },
+    {
+      "id": "retorno-Fervab-Torton-20250730000000",
+      "tipo_evento": "retorno",
+      "unidad": "Torton",
+      "pedido_id_asociado": "Fervab-Torton-20250730000000",
+      "cliente_asociado": "Fervab",
+      "fecha_pedido_asociado": "2025-07-30"
+    },
+    {
+      "id": "retorno-Fervab-Torton-20250730000000",
+      "tipo_evento": "retorno",
+      "unidad": "Torton",
+      "pedido_id_asociado": "Fervab-Torton-20250730000000",
+      "cliente_asociado": "Fervab",
+      "fecha_pedido_asociado": "2025-07-30"
+    },
+    {
+      "id": "retorno-Edce-Torton-20250730000000",
+      "tipo_evento": "retorno",
+      "unidad": "Torton",
+      "pedido_id_asociado": "Edce-Torton-20250730000000",
+      "cliente_asociado": "Edce",
+      "fecha_pedido_asociado": "2025-07-30"
     }
   ],
   "2025-07-31": [
@@ -651,6 +879,120 @@
       "pedido_id_asociado": "Comprando y Ganando-Tr\u00e1iler 53-20250729000000",
       "cliente_asociado": "Comprando y Ganando",
       "fecha_pedido_asociado": "2025-07-29"
+    }
+  ],
+  "2025-08-03": [
+    {
+      "id": "retorno-Sanchez-Tr\u00e1iler 53-20250730000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Sanchez-Tr\u00e1iler 53-20250730000000",
+      "cliente_asociado": "Sanchez",
+      "fecha_pedido_asociado": "2025-07-30"
+    },
+    {
+      "id": "retorno-Sanchez-Tr\u00e1iler 53-20250730000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Sanchez-Tr\u00e1iler 53-20250730000000",
+      "cliente_asociado": "Sanchez",
+      "fecha_pedido_asociado": "2025-07-30"
+    },
+    {
+      "id": "retorno-Sanchez-Tr\u00e1iler 53-20250730000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Sanchez-Tr\u00e1iler 53-20250730000000",
+      "cliente_asociado": "Sanchez",
+      "fecha_pedido_asociado": "2025-07-30"
+    },
+    {
+      "id": "retorno-Sanchez-Tr\u00e1iler 53-20250730000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Sanchez-Tr\u00e1iler 53-20250730000000",
+      "cliente_asociado": "Sanchez",
+      "fecha_pedido_asociado": "2025-07-30"
+    },
+    {
+      "id": "retorno-Sanchez-Tr\u00e1iler 53-20250730000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Sanchez-Tr\u00e1iler 53-20250730000000",
+      "cliente_asociado": "Sanchez",
+      "fecha_pedido_asociado": "2025-07-30"
+    },
+    {
+      "id": "retorno-Sanchez-Tr\u00e1iler 53-20250730000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Sanchez-Tr\u00e1iler 53-20250730000000",
+      "cliente_asociado": "Sanchez",
+      "fecha_pedido_asociado": "2025-07-30"
+    },
+    {
+      "id": "retorno-Sanchez-Tr\u00e1iler 53-20250730000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Sanchez-Tr\u00e1iler 53-20250730000000",
+      "cliente_asociado": "Sanchez",
+      "fecha_pedido_asociado": "2025-07-30"
+    },
+    {
+      "id": "retorno-Sanchez-Tr\u00e1iler 53-20250730000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Sanchez-Tr\u00e1iler 53-20250730000000",
+      "cliente_asociado": "Sanchez",
+      "fecha_pedido_asociado": "2025-07-30"
+    },
+    {
+      "id": "retorno-Sanchez-Tr\u00e1iler 48-20250730000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 48",
+      "pedido_id_asociado": "Sanchez-Tr\u00e1iler 48-20250730000000",
+      "cliente_asociado": "Sanchez",
+      "fecha_pedido_asociado": "2025-07-30"
+    },
+    {
+      "id": "retorno-Sanchez-Tr\u00e1iler 48-20250730000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 48",
+      "pedido_id_asociado": "Sanchez-Tr\u00e1iler 48-20250730000000",
+      "cliente_asociado": "Sanchez",
+      "fecha_pedido_asociado": "2025-07-30"
+    },
+    {
+      "id": "retorno-Succasa-Tr\u00e1iler 53-20250730000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Succasa-Tr\u00e1iler 53-20250730000000",
+      "cliente_asociado": "Succasa",
+      "fecha_pedido_asociado": "2025-07-30"
+    },
+    {
+      "id": "retorno-Succasa-Tr\u00e1iler 53-20250730000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Succasa-Tr\u00e1iler 53-20250730000000",
+      "cliente_asociado": "Succasa",
+      "fecha_pedido_asociado": "2025-07-30"
+    },
+    {
+      "id": "retorno-Sanchez-Interplanta-20250730000000",
+      "tipo_evento": "retorno",
+      "unidad": "Interplanta",
+      "pedido_id_asociado": "Sanchez-Interplanta-20250730000000",
+      "cliente_asociado": "Sanchez",
+      "fecha_pedido_asociado": "2025-07-30"
+    },
+    {
+      "id": "retorno-Comprando y Ganando-Interplanta-20250730000000",
+      "tipo_evento": "retorno",
+      "unidad": "Interplanta",
+      "pedido_id_asociado": "Comprando y Ganando-Interplanta-20250730000000",
+      "cliente_asociado": "Comprando y Ganando",
+      "fecha_pedido_asociado": "2025-07-30"
     }
   ]
 }

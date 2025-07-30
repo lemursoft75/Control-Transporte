@@ -38,48 +38,67 @@ with tabs[0]:
     hoy_str = hoy.strftime("%Y-%m-%d")
     mañana_str = mañana.strftime("%Y-%m-%d")
 
-    eventos_hoy = calendar.get(hoy_str, [])
-    eventos_mañana = calendar.get(mañana_str, [])
-
+    # Contadores para cargas y retornos por día (hoy y mañana)
     cargas_hoy = {unidad: 0 for unidad in units.keys()}
     retornos_hoy = {unidad: 0 for unidad in units.keys()}
     cargas_mañana = {unidad: 0 for unidad in units.keys()}
     retornos_mañana = {unidad: 0 for unidad in units.keys()}
+    unidades_en_transito = {unidad: 0 for unidad in units.keys()}
 
-    # Contar cargas y retornos para hoy
-    for evento in eventos_hoy:
-        if evento.get("tipo_evento") == "entrega":
-            cargas_hoy[evento["unidad"]] += 1
-        elif evento.get("tipo_evento") == "retorno":
-            retornos_hoy[evento["unidad"]] += 1
+    # Iterar por TODO el calendario para calcular las unidades en tránsito y los eventos del día
+    for fecha_cal_str, eventos_dia in calendar.items():
+        fecha_cal_dt = datetime.strptime(fecha_cal_str, "%Y-%m-%d").date()
 
-    # Contar cargas y retornos para mañana
-    for evento in eventos_mañana:
-        if evento.get("tipo_evento") == "entrega":
-            cargas_mañana[evento["unidad"]] += 1
-        elif evento.get("tipo_evento") == "retorno":
-            retornos_mañana[evento["unidad"]] += 1
+        for evento in eventos_dia:
+            if evento.get("tipo_evento") == "entrega":
+                unidad_entrega = evento["unidad"]
+                fecha_pedido_entrega_dt = datetime.strptime(evento["fecha_pedido"], "%Y-%m-%d").date()
+
+                dias_retorno_para_calculo = evento.get('dias_retorno_calculados', evento['dias_retorno'])
+
+                fecha_retorno_estimada = fecha_pedido_entrega_dt + timedelta(days=dias_retorno_para_calculo)
+
+                if fecha_pedido_entrega_dt <= hoy and fecha_retorno_estimada > hoy:
+                    unidades_en_transito[unidad_entrega] += 1
+
+                if fecha_pedido_entrega_dt == hoy:
+                    cargas_hoy[unidad_entrega] += 1
+                elif fecha_pedido_entrega_dt == mañana:
+                    cargas_mañana[unidad_entrega] += 1
+
+            elif evento.get("tipo_evento") == "retorno":
+                unidad_retorno = evento["unidad"]
+                if fecha_cal_dt == hoy:
+                    retornos_hoy[unidad_retorno] += 1
+                elif fecha_cal_dt == mañana:
+                    retornos_mañana[unidad_retorno] += 1
 
     # Preparar datos para la tabla
     data = []
     for unidad_tipo in units.keys():
         disponibles_config = units[unidad_tipo]
 
-        # Calcular disponibles hoy (base - cargas de hoy + retornos de hoy)
-        disponibles_hoy = disponibles_config - cargas_hoy[unidad_tipo] + retornos_hoy[unidad_tipo]
+        # --- INICIO: CÁLCULO AJUSTADO DE "DISPONIBLES HOY (NETO)" ---
+        # Primero, lo que estaría en patio si no hubiera retornos o cargas hoy
+        en_patio_sin_movimientos_hoy = disponibles_config - unidades_en_transito[unidad_tipo]
 
-        # Calcular pronóstico para mañana (disponibles hoy - cargas de mañana + retornos de mañana)
-        pronostico_mañana = disponibles_hoy - cargas_mañana[unidad_tipo] + retornos_mañana[unidad_tipo]
+        # Luego, sumar los retornos de hoy y restar las cargas de hoy
+        disponibles_neto_hoy = en_patio_sin_movimientos_hoy + retornos_hoy[unidad_tipo] - cargas_hoy[unidad_tipo]
+        # --- FIN: CÁLCULO AJUSTADO ---
+
+        # Pronóstico para mañana: Disponibles Hoy (Neto) + Retornos de Mañana - Cargas de Mañana
+        pronostico_mañana = disponibles_neto_hoy + retornos_mañana[unidad_tipo] - cargas_mañana[unidad_tipo]
 
         data.append({
             "Unidad": unidad_tipo,
-            "Config. Base": disponibles_config,
+            "Config. Base (Físicas)": disponibles_config,
             f"Cargas Hoy ({hoy.strftime('%d/%m')})": cargas_hoy[unidad_tipo],
             f"Retornos Hoy ({hoy.strftime('%d/%m')})": retornos_hoy[unidad_tipo],
-            f"Disponibles Hoy ({hoy.strftime('%d/%m')})": disponibles_hoy,
+            "En Tránsito (Ahora)": unidades_en_transito[unidad_tipo],
+            f"Disponibles Hoy (Neto)": disponibles_neto_hoy,  # <--- CALCULO AJUSTADO
             f"Cargas Mañana ({mañana.strftime('%d/%m')})": cargas_mañana[unidad_tipo],
             f"Retornos Mañana ({mañana.strftime('%d/%m')})": retornos_mañana[unidad_tipo],
-            f"Pronóstico Mañana ({mañana.strftime('%d/%m')})": pronostico_mañana
+            f"Pronóstico Mañana ({mañana.strftime('%d/%m')})": pronostico_mañana  # <--- CALCULO AJUSTADO
         })
 
     df_resumen = pd.DataFrame(data)
@@ -87,7 +106,7 @@ with tabs[0]:
 
 # 📥 Cargar pedidos - (Sin cambios en esta sección)
 with tabs[1]:
-    #st.subheader("📁 Cargar pedidos desde Excel")
+    st.subheader("📁 Cargar pedidos desde Excel")
 
     df_cargado_temporal = cargar_excel()
 
@@ -182,8 +201,9 @@ with tabs[2]:
                 with col_display:
                     emoji = "💎" if evento["cliente"].lower() in ["plastisaro", "plastinorte"] else "🚛"
                     fecha_carga_dt = datetime.strptime(evento['fecha_pedido'], "%Y-%m-%d").date()
-                    # Usar dias_retorno_calculados si existe, sino dias_retorno
+
                     dias_para_calculo = evento.get('dias_retorno_calculados', evento['dias_retorno'])
+
                     fecha_retorno_calculada = fecha_carga_dt + timedelta(days=dias_para_calculo)
 
                     st.success(
