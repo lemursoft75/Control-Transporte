@@ -95,14 +95,29 @@ with tabs[0]:
             f"Cargas Hoy ({hoy.strftime('%d/%m')})": cargas_hoy[unidad_tipo],
             f"Retornos Hoy ({hoy.strftime('%d/%m')})": retornos_hoy[unidad_tipo],
             "En Tránsito (Ahora)": unidades_en_transito[unidad_tipo],
-            f"Disponibles Hoy (Neto)": disponibles_neto_hoy,  # <--- CALCULO AJUSTADO
+            f"Disponibles Hoy (Neto)": disponibles_neto_hoy,
             f"Cargas Mañana ({mañana.strftime('%d/%m')})": cargas_mañana[unidad_tipo],
             f"Retornos Mañana ({mañana.strftime('%d/%m')})": retornos_mañana[unidad_tipo],
-            f"Pronóstico Mañana ({mañana.strftime('%d/%m')})": pronostico_mañana  # <--- CALCULO AJUSTADO
+            f"Pronóstico Mañana ({mañana.strftime('%d/%m')})": pronostico_mañana
         })
 
     df_resumen = pd.DataFrame(data)
-    st.dataframe(df_resumen.set_index("Unidad"))
+
+    # --- NUEVO: Calcular y añadir fila de totales ---
+    totales = df_resumen.sum(numeric_only=True)
+    # Crear un DataFrame para la fila de totales
+    totales_df = pd.DataFrame(totales).T  # .T transpone para que sea una fila
+    totales_df.insert(0, "Unidad", "TOTAL")  # Añadir columna "Unidad" con el valor "TOTAL"
+
+    # Asegurarse de que las columnas de texto (si las hubiera, aunque aquí solo es 'Unidad') no sumen
+    # Y que el orden de las columnas sea el mismo
+    totales_df = totales_df[df_resumen.columns]  # Asegura el orden de las columnas
+
+    # Concatenar el DataFrame original con la fila de totales
+    df_resumen_con_totales = pd.concat([df_resumen, totales_df], ignore_index=True)
+    # --- FIN NUEVO ---
+
+    st.dataframe(df_resumen_con_totales.set_index("Unidad"))
 
 # 📥 Cargar pedidos - (Sin cambios en esta sección)
 with tabs[1]:
@@ -172,87 +187,115 @@ with tabs[1]:
     elif pedidos_excel_df is not None and pedidos_excel_df.empty:
         st.info("El archivo Excel cargado no contiene pedidos válidos.")
 
-# 🗓️ Calendario - (Sin cambios en esta sección)
+# 🗓️ Calendario - (Sin cambios en esta sección, solo el cambio ya implementado de unicidad de keys)
 with tabs[2]:
     st.subheader("📆 Calendario de Pedidos")
 
     if isinstance(calendar, dict):
+        # Selector de fecha específico
+        st.markdown("---")
+        fecha_seleccionada = st.date_input("Seleccionar fecha específica:", value=None,
+                                           help="Deja en blanco para ver todos los días con eventos.")
+        st.markdown("---")
+
         all_dates = sorted(calendar.keys())
 
         found_results_calendar = False
 
-        for fecha_str in all_dates:
+        # Determinar qué fechas mostrar
+        if fecha_seleccionada:
+            dates_to_display = [fecha_seleccionada.strftime("%Y-%m-%d")]
+        else:
+            dates_to_display = all_dates
+
+        for fecha_str in dates_to_display:
             eventos = calendar.get(fecha_str, [])
+            fecha_dt = datetime.strptime(fecha_str, "%Y-%m-%d").date()
 
             filtered_entregas = [e for e in eventos if e.get("tipo_evento") == "entrega"]
             filtered_retornos = [e for e in eventos if e.get("tipo_evento") == "retorno"]
 
-            if not filtered_entregas and not filtered_retornos:
-                continue
+            if not filtered_entregas and not filtered_retornos and fecha_str not in calendar:
+                if fecha_seleccionada and fecha_str == fecha_seleccionada.strftime("%Y-%m-%d"):
+                    pass
+                else:
+                    continue
 
             found_results_calendar = True
 
             st.markdown(f"### 📅 {fecha_str}")
-            resumen = f"• {len(filtered_entregas)} carga(s), {len(filtered_retornos)} retorno(s)"
-            st.caption(resumen)
 
-            for i, evento in enumerate(filtered_entregas):
-                col_display, col_edit_delete = st.columns([0.7, 0.3])
-                with col_display:
+            col_cargas, col_retornos = st.columns(2)
+
+            with col_cargas:
+                st.markdown(f"#### ⬆️ Cargas / Salidas ({len(filtered_entregas)})")
+                if not filtered_entregas:
+                    st.info("No hay cargas para este día.")
+                for i, evento in enumerate(filtered_entregas):
                     emoji = "💎" if evento["cliente"].lower() in ["plastisaro", "plastinorte"] else "🚛"
                     fecha_carga_dt = datetime.strptime(evento['fecha_pedido'], "%Y-%m-%d").date()
-
                     dias_para_calculo = evento.get('dias_retorno_calculados', evento['dias_retorno'])
-
                     fecha_retorno_calculada = fecha_carga_dt + timedelta(days=dias_para_calculo)
 
                     st.success(
                         f"{emoji} **{evento['cliente']}** — {evento['unidad']} | "
                         f"🚚 Carga: {fecha_carga_dt.strftime('%d/%m/%Y')} → Retorno: {fecha_retorno_calculada.strftime('%d/%m/%Y')}"
                     )
-                with col_edit_delete:
-                    if st.button(f"🗑️ Eliminar {evento['cliente'][:10]}...", key=f"del_btn_{evento['id']}_{i}"):
-                        ok, msg = eliminar_pedido(calendar, units, evento['id'])
-                        if ok:
-                            st.success(msg)
-                            save_units(units)
-                            save_calendar(calendar)
-                            st.rerun()
-                        else:
-                            st.error(msg)
-                    with st.expander(f"Editar días ({evento['cliente'][:10]})"):
-                        nuevos_dias = st.number_input(
-                            f"Nuevos días retorno para {evento['cliente']}",
-                            value=evento['dias_retorno'],
-                            min_value=1,
-                            key=f"dias_input_{evento['id']}_{i}"
-                        )
-                        if st.button(f"Guardar edición", key=f"save_edit_btn_{evento['id']}_{i}"):
-                            ok, msg = editar_dias_retorno(calendar, units, evento['id'], nuevos_dias)
+                    delete_edit_col1, delete_edit_col2 = st.columns(2)
+                    with delete_edit_col1:
+                        if st.button(f"🗑️ Eliminar {evento['cliente'][:10]}...",
+                                     key=f"del_btn_{evento['id']}_{i}_{fecha_str}"):
+                            ok, msg = eliminar_pedido(calendar, units, evento['id'])
                             if ok:
                                 st.success(msg)
+                                save_units(units)
                                 save_calendar(calendar)
                                 st.rerun()
                             else:
                                 st.error(msg)
+                    with delete_edit_col2:
+                        with st.expander(f"Editar días ({evento['cliente'][:10]})", expanded=False):
+                            nuevos_dias = st.number_input(
+                                f"Nuevos días retorno para {evento['cliente']}",
+                                value=evento['dias_retorno'],
+                                min_value=1,
+                                key=f"dias_input_{evento['id']}_{i}_{fecha_str}"
+                            )
+                            if st.button(f"Guardar edición", key=f"save_edit_btn_{evento['id']}_{i}_{fecha_str}"):
+                                ok, msg = editar_dias_retorno(calendar, units, evento['id'], nuevos_dias)
+                                if ok:
+                                    st.success(msg)
+                                    save_calendar(calendar)
+                                    st.rerun()
+                                else:
+                                    st.error(msg)
+                    st.markdown("---")
 
-            for evento in filtered_retornos:
-                cliente_retorno = evento.get("cliente_asociado", "Desconocido")
-                fecha_pedido_retorno_str = evento.get("fecha_pedido_asociado", "Fecha desconocida")
+            with col_retornos:
+                st.markdown(f"#### ⬇️ Retornos / Entradas ({len(filtered_retornos)})")
+                if not filtered_retornos:
+                    st.info("No hay retornos para este día.")
+                for evento in filtered_retornos:
+                    cliente_retorno = evento.get("cliente_asociado", "Desconocido")
+                    fecha_pedido_retorno_str = evento.get("fecha_pedido_asociado", "Fecha desconocida")
 
-                try:
-                    fecha_pedido_dt = datetime.strptime(fecha_pedido_retorno_str, "%Y-%m-%d").date()
-                    fecha_pedido_formateada = fecha_pedido_dt.strftime('%d/%m/%Y')
-                except (ValueError, TypeError):
-                    fecha_pedido_formateada = "Fecha no válida"
+                    try:
+                        fecha_pedido_dt = datetime.strptime(fecha_pedido_retorno_str, "%Y-%m-%d").date()
+                        fecha_pedido_formateada = fecha_pedido_dt.strftime('%d/%m/%Y')
+                    except (ValueError, TypeError):
+                        fecha_pedido_formateada = "Fecha no válida"
 
-                st.info(
-                    f"🔁 Retorno de unidad: **{evento['unidad']}** | "
-                    f"Pedido: {cliente_retorno} (Carga: {fecha_pedido_formateada})"
-                )
+                    st.info(
+                        f"🔁 Retorno de unidad: **{evento['unidad']}** | "
+                        f"Pedido: {cliente_retorno} (Carga: {fecha_pedido_formateada})"
+                    )
+                    st.markdown("---")
 
-        if not found_results_calendar and not calendar:
+        if not found_results_calendar and not fecha_seleccionada:
             st.info("El calendario está vacío. Registra pedidos para verlos aquí.")
+        elif not found_results_calendar and fecha_seleccionada:
+            st.info(
+                f"No hay eventos (cargas o retornos) registrados para el {fecha_seleccionada.strftime('%d/%m/%Y')}.")
 
     else:
         st.error("❌ El calendario no tiene el formato correcto.")
