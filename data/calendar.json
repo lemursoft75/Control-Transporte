@@ -837,6 +837,51 @@
       "pedido_id_asociado": "Peralta-Torton-20250729000000",
       "cliente_asociado": "Peralta",
       "fecha_pedido_asociado": "2025-07-29"
+    },
+    {
+      "id": "Plastisaro-Tr\u00e1iler 53-20250731000000",
+      "cliente": "Plastisaro",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 2,
+      "fecha_pedido": "2025-07-31",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Plastisaro-Tr\u00e1iler 53-20250731000000",
+      "cliente": "Plastisaro",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 2,
+      "fecha_pedido": "2025-07-31",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Plastisaro-Tr\u00e1iler 53-20250731000000",
+      "cliente": "Plastisaro",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 2,
+      "fecha_pedido": "2025-07-31",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Plastisaro-Tr\u00e1iler 53-20250731000000",
+      "cliente": "Plastisaro",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 2,
+      "fecha_pedido": "2025-07-31",
+      "tipo_evento": "entrega"
+    },
+    {
+      "id": "Plastisaro-Tr\u00e1iler 53-20250731000000",
+      "cliente": "Plastisaro",
+      "unidad": "Tr\u00e1iler 53",
+      "dias_retorno": 2,
+      "dias_retorno_calculados": 2,
+      "fecha_pedido": "2025-07-31",
+      "tipo_evento": "entrega"
     }
   ],
   "2025-08-02": [
@@ -879,6 +924,46 @@
       "pedido_id_asociado": "Comprando y Ganando-Tr\u00e1iler 53-20250729000000",
       "cliente_asociado": "Comprando y Ganando",
       "fecha_pedido_asociado": "2025-07-29"
+    },
+    {
+      "id": "retorno-Plastisaro-Tr\u00e1iler 53-20250731000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Plastisaro-Tr\u00e1iler 53-20250731000000",
+      "cliente_asociado": "Plastisaro",
+      "fecha_pedido_asociado": "2025-07-31"
+    },
+    {
+      "id": "retorno-Plastisaro-Tr\u00e1iler 53-20250731000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Plastisaro-Tr\u00e1iler 53-20250731000000",
+      "cliente_asociado": "Plastisaro",
+      "fecha_pedido_asociado": "2025-07-31"
+    },
+    {
+      "id": "retorno-Plastisaro-Tr\u00e1iler 53-20250731000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Plastisaro-Tr\u00e1iler 53-20250731000000",
+      "cliente_asociado": "Plastisaro",
+      "fecha_pedido_asociado": "2025-07-31"
+    },
+    {
+      "id": "retorno-Plastisaro-Tr\u00e1iler 53-20250731000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Plastisaro-Tr\u00e1iler 53-20250731000000",
+      "cliente_asociado": "Plastisaro",
+      "fecha_pedido_asociado": "2025-07-31"
+    },
+    {
+      "id": "retorno-Plastisaro-Tr\u00e1iler 53-20250731000000",
+      "tipo_evento": "retorno",
+      "unidad": "Tr\u00e1iler 53",
+      "pedido_id_asociado": "Plastisaro-Tr\u00e1iler 53-20250731000000",
+      "cliente_asociado": "Plastisaro",
+      "fecha_pedido_asociado": "2025-07-31"
     }
   ],
   "2025-08-03": [
