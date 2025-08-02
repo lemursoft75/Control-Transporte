@@ -20,7 +20,7 @@ pedidos_excel_df = load_pedidos_excel()
 
 tabs = st.tabs(["📦 Unidades disponibles", "📥 Cargar pedidos", "🗓️ Calendario", "🧹 Limpieza"])
 
-# 📦 Unidades disponibles - ¡Nuevas métricas aquí!
+# 📦 Unidades disponibles - Lógica de "En Tránsito" corregida
 with tabs[0]:
     st.subheader("🔧 Configurar unidades base")
     for unidad in units:
@@ -58,7 +58,8 @@ with tabs[0]:
 
                 fecha_retorno_estimada = fecha_pedido_entrega_dt + timedelta(days=dias_retorno_para_calculo)
 
-                if fecha_pedido_entrega_dt <= hoy and fecha_retorno_estimada > hoy:
+                # Lógica corregida: El tránsito son los que salieron ANTES de hoy.
+                if fecha_pedido_entrega_dt < hoy and fecha_retorno_estimada > hoy:
                     unidades_en_transito[unidad_entrega] += 1
 
                 if fecha_pedido_entrega_dt == hoy:
@@ -78,13 +79,12 @@ with tabs[0]:
     for unidad_tipo in units.keys():
         disponibles_config = units[unidad_tipo]
 
-        # --- INICIO: CÁLCULO AJUSTADO DE "DISPONIBLES HOY (NETO)" ---
-        # Primero, lo que estaría en patio si no hubiera retornos o cargas hoy
-        en_patio_sin_movimientos_hoy = disponibles_config - unidades_en_transito[unidad_tipo]
-
-        # Luego, sumar los retornos de hoy y restar las cargas de hoy
-        disponibles_neto_hoy = en_patio_sin_movimientos_hoy + retornos_hoy[unidad_tipo] - cargas_hoy[unidad_tipo]
-        # --- FIN: CÁLCULO AJUSTADO ---
+        # El cálculo de "disponibles hoy neto" se basa en las unidades totales menos
+        # las que salieron ANTES de hoy, más los retornos de hoy, menos las cargas de hoy.
+        disponibles_neto_hoy = (
+                disponibles_config - unidades_en_transito[unidad_tipo] +
+                retornos_hoy[unidad_tipo] - cargas_hoy[unidad_tipo]
+        )
 
         # Pronóstico para mañana: Disponibles Hoy (Neto) + Retornos de Mañana - Cargas de Mañana
         pronostico_mañana = disponibles_neto_hoy + retornos_mañana[unidad_tipo] - cargas_mañana[unidad_tipo]
@@ -103,19 +103,12 @@ with tabs[0]:
 
     df_resumen = pd.DataFrame(data)
 
-    # --- NUEVO: Calcular y añadir fila de totales ---
+    # --- Calcular y añadir fila de totales ---
     totales = df_resumen.sum(numeric_only=True)
-    # Crear un DataFrame para la fila de totales
-    totales_df = pd.DataFrame(totales).T  # .T transpone para que sea una fila
-    totales_df.insert(0, "Unidad", "TOTAL")  # Añadir columna "Unidad" con el valor "TOTAL"
-
-    # Asegurarse de que las columnas de texto (si las hubiera, aunque aquí solo es 'Unidad') no sumen
-    # Y que el orden de las columnas sea el mismo
-    totales_df = totales_df[df_resumen.columns]  # Asegura el orden de las columnas
-
-    # Concatenar el DataFrame original con la fila de totales
+    totales_df = pd.DataFrame(totales).T
+    totales_df.insert(0, "Unidad", "TOTAL")
+    totales_df = totales_df[df_resumen.columns]
     df_resumen_con_totales = pd.concat([df_resumen, totales_df], ignore_index=True)
-    # --- FIN NUEVO ---
 
     st.dataframe(df_resumen_con_totales.set_index("Unidad"))
 
@@ -187,26 +180,38 @@ with tabs[1]:
     elif pedidos_excel_df is not None and pedidos_excel_df.empty:
         st.info("El archivo Excel cargado no contiene pedidos válidos.")
 
-# 🗓️ Calendario - (Sin cambios en esta sección, solo el cambio ya implementado de unicidad de keys)
+# 🗓️ Calendario - Lógica de unidades en tránsito corregida
 with tabs[2]:
     st.subheader("📆 Calendario de Pedidos")
 
     if isinstance(calendar, dict):
-        # Selector de fecha específico
         st.markdown("---")
         fecha_seleccionada = st.date_input("Seleccionar fecha específica:", value=None,
                                            help="Deja en blanco para ver todos los días con eventos.")
         st.markdown("---")
 
-        all_dates = sorted(calendar.keys())
-
+        all_dates = sorted(list(calendar.keys()))
         found_results_calendar = False
 
-        # Determinar qué fechas mostrar
+        # Determinar qué fechas mostrar, incluyendo días con unidades en tránsito
+        in_transit_dates = set()
+        for fecha_cal_str, eventos_dia in calendar.items():
+            fecha_cal_dt = datetime.strptime(fecha_cal_str, "%Y-%m-%d").date()
+            for evento in eventos_dia:
+                if evento.get("tipo_evento") == "entrega":
+                    fecha_pedido_dt = datetime.strptime(evento["fecha_pedido"], "%Y-%m-%d").date()
+                    dias_retorno = evento.get('dias_retorno_calculados', evento['dias_retorno'])
+                    fecha_retorno_estimada = fecha_pedido_dt + timedelta(days=dias_retorno)
+
+                    # El tránsito empieza el día siguiente a la carga
+                    current_date = fecha_pedido_dt + timedelta(days=1)
+                    while current_date < fecha_retorno_estimada:
+                        in_transit_dates.add(current_date.strftime("%Y-%m-%d"))
+                        current_date += timedelta(days=1)
+
+        dates_to_display = sorted(list(set(all_dates) | in_transit_dates))
         if fecha_seleccionada:
             dates_to_display = [fecha_seleccionada.strftime("%Y-%m-%d")]
-        else:
-            dates_to_display = all_dates
 
         for fecha_str in dates_to_display:
             eventos = calendar.get(fecha_str, [])
@@ -215,7 +220,21 @@ with tabs[2]:
             filtered_entregas = [e for e in eventos if e.get("tipo_evento") == "entrega"]
             filtered_retornos = [e for e in eventos if e.get("tipo_evento") == "retorno"]
 
-            if not filtered_entregas and not filtered_retornos and fecha_str not in calendar:
+            # --- NUEVO: Calcular y obtener lista de unidades en tránsito para este día (con lógica corregida) ---
+            unidades_en_transito_lista = []
+            for fecha_cal_str_all, eventos_cal_dia_all in calendar.items():
+                for evento in eventos_cal_dia_all:
+                    if evento.get("tipo_evento") == "entrega":
+                        fecha_pedido_dt = datetime.strptime(evento["fecha_pedido"], "%Y-%m-%d").date()
+                        dias_retorno = evento.get('dias_retorno_calculados', evento['dias_retorno'])
+                        fecha_retorno_estimada = fecha_pedido_dt + timedelta(days=dias_retorno)
+
+                        # El tránsito comienza el día siguiente a la carga
+                        if fecha_pedido_dt < fecha_dt < fecha_retorno_estimada:
+                            unidades_en_transito_lista.append(evento)
+            # --- FIN NUEVO ---
+
+            if not filtered_entregas and not filtered_retornos and not unidades_en_transito_lista and fecha_str not in calendar:
                 if fecha_seleccionada and fecha_str == fecha_seleccionada.strftime("%Y-%m-%d"):
                     pass
                 else:
@@ -224,6 +243,15 @@ with tabs[2]:
             found_results_calendar = True
 
             st.markdown(f"### 📅 {fecha_str}")
+
+            # --- NUEVO: Mostrar el detalle de las unidades en tránsito ---
+            st.info(f"🚚 **Unidades en tránsito:** {len(unidades_en_transito_lista)} en total.")
+            if unidades_en_transito_lista:
+                with st.expander("Ver detalle de unidades en tránsito"):
+                    for evento_transito in unidades_en_transito_lista:
+                        st.markdown(
+                            f"**{evento_transito['unidad']}** — Cliente: {evento_transito['cliente']} (Cargado el: {evento_transito['fecha_pedido']})")
+            # --- FIN NUEVO ---
 
             col_cargas, col_retornos = st.columns(2)
 
@@ -295,7 +323,7 @@ with tabs[2]:
             st.info("El calendario está vacío. Registra pedidos para verlos aquí.")
         elif not found_results_calendar and fecha_seleccionada:
             st.info(
-                f"No hay eventos (cargas o retornos) registrados para el {fecha_seleccionada.strftime('%d/%m/%Y')}.")
+                f"No hay eventos (cargas, retornos o en tránsito) registrados para el {fecha_seleccionada.strftime('%d/%m/%Y')}.")
 
     else:
         st.error("❌ El calendario no tiene el formato correcto.")
